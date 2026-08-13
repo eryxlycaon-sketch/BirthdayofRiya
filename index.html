@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- 3. FAVICON -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+    
+    <!-- 1. SOCIAL SHARING META TAGS -->
+    <title>Small Gift For Afsana</title>
+    <meta property="og:title" content="Happy Birthday, Afsana! 💖">
+    <meta property="og:description" content="A special interactive journey, just for you. Open it to see what's inside.">
+    <meta property="og:image" content="assets/photo1.jpg"> 
+    <meta property="og:type" content="website">
+
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Hind+Siliguri:wght@300;400;500;600&family=Noto+Serif+Bengali:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           HIDE SCROLLBAR COMPLETELY
+        ========================================= */
+        ::-webkit-scrollbar { display: none; width: 0; background: transparent; }
+        * { -ms-overflow-style: none; scrollbar-width: none; margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* =========================================
+           CSS VARIABLES: VIBRANT 3D PINK THEME
+        ========================================= */
+        :root {
+            --text-main: #1a1a24; 
+            --text-muted: #5e5e6e;
+            --accent: #ff0844; 
+            --font-display: 'Cormorant Garamond', 'Noto Serif Bengali', serif; 
+            --font-sans: 'Inter', 'Hind Siliguri', sans-serif;
+            --font-script: 'Alex Brush', cursive;
+        }
+
+        html, body {
+            background: linear-gradient(135deg, #f3eaff 0%, #fee4f1 50%, #fbd5e7 100%);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* =========================================
+           BACKGROUND ELEMENTS (OPTIMIZED FOR MOBILE GPU)
+        ========================================= */
+        .theme-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: -2; pointer-events: none;}
+        .grid-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(to right, rgba(255, 8, 68, 0.04) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 8, 68, 0.04) 1px, transparent 1px);
+            background-size: 50px 50px; z-index: -1; transform: translateZ(0);
+        }
+
+        /* Removed filter: blur() to stop lag. Replaced with radial-gradient fade out */
+        .orb {
+            position: absolute; border-radius: 50%;
+            animation: float 20s infinite ease-in-out alternate;
+            will-change: transform; pointer-events: none;
+        }
+        .orb-1 { width: 60vw; height: 60vw; background: radial-gradient(circle closest-side, rgba(255,126,179,0.5) 0%, rgba(255,8,68,0) 100%); top: -15%; left: -15%; }
+        .orb-2 { width: 55vw; height: 55vw; background: radial-gradient(circle closest-side, rgba(254,207,239,0.5) 0%, rgba(255,154,158,0) 100%); bottom: -15%; right: -10%; animation-delay: -5s; animation-direction: alternate-reverse; }
+        .orb-3 { width: 50vw; height: 50vw; background: radial-gradient(circle closest-side, rgba(205,156,242,0.4) 0%, rgba(246,243,255,0) 100%); top: 25%; left: 30%; animation-delay: -10s; }
+        
+        @keyframes float {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            100% { transform: translate3d(8%, 12%, 0) scale(1.1); }
+        }
+
+        /* =========================================
+           FROSTED GLASSMORPHISM (Hardware Accelerated)
+        ========================================= */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px rgba(255, 8, 68, 0.06);
+            border-radius: 20px;
+            transform: translateZ(0); /* Force GPU Render */
+        }
+
+        h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0;}
+        
+        /* UI Buttons */
+        .ui-overlay { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.8s ease; }
+        .ui-overlay.active { pointer-events: auto; }
+
+        .audio-btn {
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 1); color: var(--accent); width: 48px; height: 48px;
+            border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: transform 0.3s ease, background 0.3s ease; box-shadow: 0 4px 15px rgba(255, 8, 68, 0.15);
+            will-change: transform;
+        }
+        .audio-btn:hover { transform: scale(1.05); background: #fff; }
+
+        .reveal-pre, .reveal-date, .reveal-main, .reveal-name, .journey-text, .journey-sub, .memory-item, .wish-card, .outro-quote, .outro-wish, .outro-signature {
+            will-change: transform, opacity;
+        }
+
+        /* =========================================
+           SCENE 1: MYSTERY OPENING
+        ========================================= */
+        #scene-intro {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100svh;
+            background: transparent; z-index: 5000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+        }
+        #intro-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .intro-content { z-index: 2; transform: translateZ(0); }
+        .intro-greeting { font-family: var(--font-display); font-style: italic; font-size: clamp(3.5rem, 8vw, 6rem); margin-bottom: 0.5rem; opacity: 0; }
+        .intro-sub { font-size: clamp(1.1rem, 2.5vw, 1.4rem); color: var(--text-muted); margin-bottom: 3rem; opacity: 0; letter-spacing: 1px;}
+        
+        .glow-btn {
+            padding: 1.2rem 4rem; font-family: var(--font-sans); font-size: 0.95rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+            background: linear-gradient(90deg, #ff0844 0%, #ffb199 100%); color: #fff;
+            border: none; border-radius: 50px; cursor: pointer; opacity: 0; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s; position: relative;
+            box-shadow: 0 8px 20px rgba(255, 8, 68, 0.25); will-change: transform;
+        }
+        .glow-btn:hover { box-shadow: 0 12px 25px rgba(255, 8, 68, 0.4); transform: translateY(-4px) scale(1.02); }
+
+        /* =========================================
+           SCENE 2: REVEAL
+        ========================================= */
+        .scene { position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1; transform: translateZ(0);}
+        #scene-reveal { height: 100vh; } 
+        .reveal-container { width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .reveal-pre { font-size: clamp(0.9rem, 2vw, 1.2rem); color: var(--text-muted); font-weight: 500; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 4px; opacity: 0;}
+        .reveal-date { font-size: clamp(1.1rem, 3vw, 1.4rem); letter-spacing: 6px; color: var(--accent); margin-bottom: 1rem; opacity: 0; font-weight: 500;}
+        .reveal-main { font-size: clamp(2.5rem, 8vw, 6rem); line-height: 1.1; margin-bottom: 0.5rem; opacity: 0; color: var(--text-main); letter-spacing: 4px; text-transform: uppercase; }
+        .reveal-name { font-family: var(--font-script); font-size: clamp(5.5rem, 22vw, 15rem); color: var(--accent); line-height: 1; opacity: 0; margin-top: -15px; text-shadow: 2px 2px 0px #fff;}
+
+        /* =========================================
+           SCENE 3 & 4: JOURNEY & GALLERY
+        ========================================= */
+        #scene-journey { min-height: 100vh; text-align: center; padding: 0 2rem; }
+        .journey-text { font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: 1.2; margin-bottom: 2rem; opacity: 0; font-style: italic;}
+        .journey-sub { font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--text-muted); max-width: 700px; line-height: 1.8; opacity: 0; }
+
+        #scene-gallery { padding: 10vh 5vw; min-height: auto; }
+        .gallery-container { display: flex; flex-direction: column; gap: 15vh; width: 100%; max-width: 1000px; margin: 0 auto; overflow-x: hidden; }
+        .memory-item { display: flex; flex-direction: column; gap: 1.5rem; align-items: center; text-align: center; opacity: 0; transform: translateY(40px); }
+        .memory-item:nth-child(even) { align-items: flex-start; text-align: left; }
+        .memory-item:nth-child(odd) { align-items: flex-end; text-align: right; }
+        
+        .img-wrapper { 
+            width: 100%; max-width: 600px; height: auto; position: relative; 
+            padding: 10px; background: #ffffff; border-radius: 20px; border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 15px 40px rgba(255, 8, 68, 0.08); display: inline-block; transform: translateZ(0); 
+        }
+        .img-wrapper img { width: 100%; height: auto; display: block; border-radius: 12px; transition: transform 0.6s ease; }
+        .img-wrapper:hover img { transform: scale(1.02); }
+        .memory-text h3 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 0.5rem; font-style: italic;}
+        .memory-text p { color: var(--text-muted); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.7; max-width: 450px;}
+
+        @media (max-width: 768px) {
+            .memory-item:nth-child(even), .memory-item:nth-child(odd) { align-items: center; text-align: center; }
+            .img-wrapper { padding: 8px; }
+        }
+
+        /* =========================================
+           SCENE 5: WISHES 
+        ========================================= */
+        #scene-wishes { padding: 15vh 1.5rem; min-height: 100vh; }
+        .section-title { font-size: clamp(2.2rem, 6vw, 4rem); margin-bottom: 4rem; text-align: center; font-style: italic;}
+        .wishes-container { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; max-width: 1200px; margin: 0 auto;}
+        
+        .wish-card {
+            padding: 3.5rem 2rem; width: 320px; text-align: center; border-radius: 20px; cursor: pointer; position: relative; overflow: hidden; opacity: 0; transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease, background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .wish-card.show { opacity: 1; transform: translateY(0); }
+        .wish-card.show:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(255, 8, 68, 0.12); background: #ffffff;}
+        
+        .wish-num { font-size: 0.9rem; color: var(--accent); font-weight: 500; letter-spacing: 2px; margin-bottom: 1.5rem; display: block; }
+        .wish-title { font-size: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-display); font-style: italic; transition: opacity 0.3s;}
+        
+        .wish-hint {
+            position: absolute; bottom: 1.5rem; left: 0; width: 100%;
+            font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; opacity: 0.7;
+            animation: pulseHint 2s infinite; pointer-events: none; transition: opacity 0.3s;
+        }
+        @keyframes pulseHint { 0%, 100% { transform: translate3d(0,0,0); opacity: 0.5; } 50% { transform: translate3d(0,-4px,0); opacity: 1; } }
+
+        .wish-message {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%;
+            font-size: 1.1rem; color: var(--text-main); line-height: 1.7; opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        }
+        
+        .wish-card.active .wish-title, .wish-card.active .wish-num { opacity: 0; }
+        .wish-card.active .wish-hint { opacity: 0; visibility: hidden; animation: none; }
+        .wish-card.active .wish-message { opacity: 1; }
+
+        /* =========================================
+           SCENE 6: CONSTELLATION
+        ========================================= */
+        #scene-constellation { position: relative; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center;}
+        #constellation-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;}
+        .constellation-text { position: absolute; z-index: 2; pointer-events: none; text-align: center; top: 15%; width: 100%; padding: 0 2rem;}
+        .constellation-text h2 { font-size: clamp(1.8rem, 5vw, 3rem); opacity: 0.9; font-family: var(--font-display); font-style: italic;}
+        .constellation-initial { position: absolute; z-index: 1; font-size: clamp(10rem, 35vw, 30rem); font-family: var(--font-script); color: rgba(255, 8, 68, 0.04); pointer-events: none; }
+
+        /* =========================================
+           SCENE 7: THE LETTER
+        ========================================= */
+        #scene-letter { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .pre-letter { font-family: var(--font-sans); font-size: clamp(0.9rem, 2vw, 1.1rem); color: #4a5568; font-weight: 600; margin-bottom: 2.5rem; text-transform: uppercase; letter-spacing: 4px; }
+        
+        .envelope-wrapper { position: relative; width: 340px; height: 210px; cursor: pointer; perspective: 1000px; transition: transform 0.4s ease; margin-bottom: 2.5rem; will-change: transform;}
+        .envelope-wrapper:hover { transform: scale(1.05) translateY(-5px); }
+        .envelope { width: 100%; height: 100%; position: relative; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); transform-style: preserve-3d; }
+        .envelope-back { position: absolute; inset: 0; background: #ffffff; box-shadow: 0 15px 40px rgba(255, 8, 68, 0.08); border-radius: 12px; z-index: 1; transform: translateZ(0);}
+        .envelope-paper { position: absolute; left: 4%; right: 4%; bottom: 3%; height: 90%; background: #fafafa; border-radius: 8px; box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); z-index: 2; transform: translateZ(0);}
+        .envelope-front { position: absolute; inset: 0; background: #fdfdfd; border-radius: 12px; clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% 55%, 0 0); z-index: 3; box-shadow: inset 0 0 15px rgba(0,0,0,0.03); transform: translateZ(0);}
+        .envelope-flap { position: absolute; inset: 0; background: #ffffff; border-radius: 12px 12px 0 0; clip-path: polygon(0 0, 100% 0, 50% 55%); transform-origin: top; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); z-index: 4; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.06)); transform: translateZ(0);}
+        .seal { position: absolute; width: 48px; height: 48px; background: linear-gradient(135deg, #ff0844 0%, #ff4b72 100%); border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%, -20%); z-index: 5; display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--font-script); font-size: 1.8rem; box-shadow: 0 4px 12px rgba(255, 8, 68, 0.3); transition: 0.4s ease; }
+        
+        .open-label {
+            position: absolute; bottom: -45px; left: 0; width: 100%; text-align: center;
+            font-family: var(--font-sans); letter-spacing: 4px; font-size: 0.9rem; color: #ff0844; font-weight: 700; text-transform: uppercase; transition: opacity 0.3s ease; 
+        }
+        
+        .envelope.open .envelope-flap { transform: rotateX(180deg); z-index: 1;}
+        .envelope.open .envelope-paper { transform: translateY(-60px); z-index: 3;}
+        .envelope.open .seal { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+        .envelope.open + .open-label { opacity: 0; visibility: hidden; } 
+        
+        /* =========================================
+           FIXED SCROLL: PAPER MODAL (Smooth Mobile Setup)
+        ========================================= */
+        .letter-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100svh;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            z-index: 9999; display: flex; align-items: center; justify-content: center; 
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 1rem;
+        }
+        .letter-overlay.open { opacity: 1; pointer-events: auto; }
+        
+        .letter-paper-modal {
+            background: #fcfbf8; background-image: linear-gradient(120deg, #fdfbf7 0%, #f4f0ea 100%); color: var(--text-main); 
+            padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem); 
+            max-width: 600px; width: 100%; max-height: 80vh; 
+            overflow-y: auto; 
+            -webkit-overflow-scrolling: touch; 
+            overscroll-behavior: contain;
+            border-radius: 8px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), inset 0 0 40px rgba(150, 130, 110, 0.05); 
+            transform: translateY(30px) scale(0.98); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; margin: auto; border: 1px solid rgba(0,0,0,0.08); display: flex; flex-direction: column;
+            will-change: transform;
+        }
+        .letter-paper-modal::-webkit-scrollbar { width: 6px; }
+        .letter-paper-modal::-webkit-scrollbar-thumb { background: rgba(255,8,68,0.3); border-radius: 10px; }
+        
+        .letter-overlay.open .letter-paper-modal { transform: translateY(0) scale(1); }
+        
+        #letter-content-text { font-family: var(--font-display); font-size: clamp(1.2rem, 3vw, 1.5rem); line-height: 1.8; white-space: pre-wrap; margin-top: 1.5rem; flex-grow: 1;}
+        .fancy-signature { font-family: var(--font-script); font-size: clamp(3rem, 8vw, 4.5rem); color: var(--accent); display: block; margin-top: 1.5rem; line-height: 1; }
+        
+        .close-letter {
+            position: absolute; top: 1rem; right: 1rem; background: rgba(255, 8, 68, 0.05); border: none; color: var(--accent); font-size: 1.5rem; 
+            width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.2s ease; z-index: 10;
+        }
+        .close-letter:hover { background: var(--accent); color: #fff; transform: scale(1.1);}
+
+        /* =========================================
+           SCENE 8: FINAL MOMENT
+        ========================================= */
+        #scene-outro { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 2rem;}
+        .outro-quote { font-size: clamp(1.2rem, 3vw, 1.6rem); color: var(--text-muted); margin-bottom: 4rem; font-style: italic; opacity: 0;}
+        .outro-wish { font-size: clamp(2.8rem, 8vw, 5.5rem); margin-bottom: 1.5rem; opacity: 0; letter-spacing: 2px;}
+        .outro-signature { font-family: var(--font-script); font-size: clamp(3.5rem, 8vw, 5rem); opacity: 0; margin-bottom: 4rem; color: var(--accent); }
+        .replay-btn { background: transparent; color: var(--text-muted); border: none; border-bottom: 1px solid var(--text-muted); padding-bottom: 4px; font-family: var(--font-sans); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; cursor: pointer; opacity: 0; transition: all 0.3s ease;}
+        .replay-btn:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <div class="theme-bg">
+        <div class="grid-overlay"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="ui-overlay" id="ui-overlay">
+        <button id="audio-toggle" class="audio-btn" aria-label="Toggle Audio">
+            <svg id="audio-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+        </button>
+    </div>
+    
+    <audio id="bg-music" loop>
+        <source src="assets/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <section id="scene-intro">
+        <canvas id="intro-canvas"></canvas>
+        <div class="intro-content">
+            <h1 class="intro-greeting">Hey, <span class="dynamic-name"></span>.</h1>
+            <p class="intro-sub">There's something waiting for you.</p>
+            <button id="enter-btn" class="glow-btn">Click Here Dear</button> 
+        </div>
+    </section>
+
+    <main id="main-content" style="visibility: hidden;">
+        
+        <section id="scene-reveal" class="scene">
+            <div class="reveal-container">
+                <p class="reveal-pre">Today isn't just another day.</p>
+                <p class="reveal-date dynamic-date"></p>
+                <h1 class="reveal-main" id="confetti-trigger">Happy Birthday</h1> 
+                <h2 class="reveal-name dynamic-name"></h2>
+            </div>
+        </section>
+
+        <section id="scene-journey" class="scene">
+            <h2 class="journey-text">Another year.<br>Another chapter.</h2>
+            <p class="journey-sub">And somehow, the years keep leaving little moments behind.</p>
+        </section>
+
+        <section id="scene-gallery" class="scene">
+            <div class="gallery-container" id="gallery-container"></div>
+        </section>
+
+        <section id="scene-wishes" class="scene">
+            <h2 class="section-title">Things I Wish For You</h2>
+            <div class="wishes-container" id="wishes-container"></div>
+        </section>
+
+        <section id="scene-constellation" class="scene">
+            <div class="constellation-initial">A</div>
+            <canvas id="constellation-canvas"></canvas>
+            <div class="constellation-text">
+                <h2>Every year leaves a few more stars behind.</h2>
+            </div>
+        </section>
+
+        <!-- BEAUTIFUL 3D ENVELOPE SECTION -->
+        <section id="scene-letter" class="scene">
+            <p class="pre-letter">One last thing...</p>
+            <div class="envelope-wrapper" id="envelope-wrapper">
+                <div class="envelope" id="envelope">
+                    <div class="envelope-back"></div>
+                    <div class="envelope-paper"></div>
+                    <div class="envelope-front"></div>
+                    <div class="envelope-flap"></div>
+                    <div class="seal">A</div>
+                </div>
+                <div class="open-label">Open this</div>
+            </div>
+        </section>
+
+        <section id="scene-outro" class="scene">
+            <h2 class="outro-quote">Keep becoming the person you want to be.</h2>
+            <h1 class="outro-wish">Happy Birthday, <span class="dynamic-name"></span>.</h1>
+            <p class="outro-signature">— <span class="dynamic-sender"></span></p>
+            <button id="replay-btn" class="replay-btn">Replay</button>
+        </section>
+    </main>
+
+    <div class="letter-overlay" id="letter-overlay">
+        <div class="letter-paper-modal">
+            <button class="close-letter" id="close-letter">&times;</button>
+            <div id="letter-content-text"></div>
+        </div>
+    </div>
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        /* =========================================
+           CONFIG - EDIT YOUR DETAILS HERE
+        ========================================= */
+        const CONFIG = {
+            name: "Afsana",
+            birthdayDate: "14 August 2026",
+            sender: "Mehedi",
+            musicSrc: "assets/music.mp3",
+            
+            mainHeading: "Happy Birthday", 
+
+            memories: [
+                { image: "assets/photo1.jpg", title: "A moment worth remembering", caption: "How the Journey was started. Some memories never fade. They just get painted in warmer colors as time goes by." },
+                { image: "assets/photo2.jpg", title: "HOW it's  Going", caption: "May the time passes like this" },
+                { image: "assets/photo3.jpg", title: "Beauty Queen Afsana", caption: "Keep the cutness and shine with you all the time" }
+            ],
+            
+            wishes: [
+                { title: "Happiness", message: "সুখে থাকাও এক শিল্প<br>সেই শিল্পের দক্ষ শিল্পী হয়ে ওঠো।<br>দুঃখকে কখনো জীবনের চেয়ে বড় করে দেখো না।" },
+                { title: "Success", message: "নিজের স্বপ্নের মতো করে গড়ে তুলো জীবন যেখানে তুমি থাকতে চাইবে আমৃত্যু।" },
+                { title: "Peace", message: "নিজের শান্তির চেয়ে বড় কিছু নেই।<br>নিজেকে পুড়িয়ে অন্যের জীবনে আলো জ্বালানো যায় না।" },
+                { title: "Good people", message: "হোক অল্প কিন্তু তোমার চারপাশে এমন মানুষ থাকুক<br>যারা তোমার ভালো চায়,<br>নিঃস্বার্থে ভালোবাসে।" },
+                { title: "Memories", message: "প্রিয় মানুষদের সাথে সুন্দর মুহূর্ত গুলো তৈরি করো<br>দিনশেষে মানুষ নয়,<br>কিছু স্মৃতিই থেকে যায়<br>চিরকাল, অথচ চির অধরা।" }
+            ],
+            
+            birthdayLetter: `প্রিয় আফসানা,\n\nকেমন আছো? ধরে নিচ্ছি, ভালো আছো।\nআমাদের আর আগের মতো কথা হয় না। সেটা মুখ্য বিষয় নহে। জীবনে উত্থান পতনের কারণে তোমার খুব একটা ভালো দিন যাচ্ছে না হয়তো। তবে ভেঙে পড়ো না। ভুল থেকেই আমরা শিক্ষা গ্রহণ করি। আর এভাবেই আমরা নিজেকে গড়ে তুলি। অতীত নিয়ে ভেবে কাজ নেই, তাই বর্তমানে বাঁচো এবং বর্তমানকে উপভোগ করো।\n\nআমি সবসময় জন্মদিনে একটা কথা বলি যে, জন্মদিন মনে করিয়ে দেয়, আমাদের জীবন থেকে আরও ১টা বছর চলে গেল। কাজেই নিজেকে গুছিয়ে নেওয়ার সময় আরও এক ধাপ এগিয়ে গেল। এখনো তাই বলছি।\n\nজন্মদিন উপভোগ করো, আর নিজের অতীতের ভুলগুলোকে ক্ষমা করে দিয়ে নতুনভাবে সব শুরু করো। খুব শীঘ্রই জীবনে ভালো দিন আসবে। নিজেকে ক্ষমা করা গুরুত্বপূর্ণ এবং কঠিন কাজ। অন্যকে হয়তো ক্ষমা করা যায়, কিন্তু নিজের ভেতরের নিজের ভুলগুলো ক্ষমা করে দিয়ে আবার শুরু করা অনেক ভারী একটা কাজ। আর আশা করি, তুমি সেটা পারবে।\n\nঅনেক ফালতু কথা বলে ফেললাম। দুঃখিত। আমি আর আগের মতো লিখতে পারি না। মনের মধ্যে আর শব্দরা খেলা করে না। কাজেই শুষ্ক চিঠিতে জন্মদিনের শুভেচ্ছা জানাচ্ছি আপনাকে।\n\nশুভ জন্মদিন।\n\nট্রিট দিতে ভুলবেন না কিন্তু.....\n\n<span class="fancy-signature">— Mehedi</span>`
+        };
+
+        const isMobile = window.innerWidth <= 768;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof gsap === 'undefined') return;
+            gsap.registerPlugin(ScrollTrigger);
+
+            document.querySelectorAll(".dynamic-name").forEach(el => el.textContent = CONFIG.name);
+            document.querySelectorAll(".dynamic-date").forEach(el => el.textContent = CONFIG.birthdayDate);
+            document.querySelectorAll(".dynamic-sender").forEach(el => el.textContent = CONFIG.sender);
+            document.querySelector(".reveal-main").innerHTML = CONFIG.mainHeading; 
+            document.getElementById("letter-content-text").innerHTML = CONFIG.birthdayLetter;
+            document.getElementById("bg-music").src = CONFIG.musicSrc;
+
+            const placeholderSVG = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='100%25' height='100%25' fill='%23ffe4f1'/%3E%3Ctext x='50%25' y='50%25' font-family='sans-serif' font-weight='normal' font-size='24' fill='%23ff0844' text-anchor='middle' dy='.3em'%3EBeautiful Memory Here%3C/text%3E%3C/svg%3E`;
+            
+            const galleryContainer = document.getElementById("gallery-container");
+            CONFIG.memories.forEach(mem => {
+                // Async image loading added for performance
+                galleryContainer.innerHTML += `
+                    <div class="memory-item">
+                        <div class="img-wrapper glass-panel">
+                            <img src="${mem.image}" alt="${mem.title}" onerror="this.src='${placeholderSVG}'" loading="lazy" decoding="async">
+                        </div>
+                        <div class="memory-text"><h3>${mem.title}</h3><p>${mem.caption}</p></div>
+                    </div>`;
+            });
+
+            const wishesContainer = document.getElementById("wishes-container");
+            CONFIG.wishes.forEach((wish, index) => {
+                wishesContainer.innerHTML += `
+                    <div class="wish-card glass-panel" onclick="this.classList.toggle('active')">
+                        <span class="wish-num">0${index + 1}</span>
+                        <h3 class="wish-title">${wish.title}</h3>
+                        <div class="wish-hint">Tap to open</div>
+                        <p class="wish-message">${wish.message}</p>
+                    </div>`;
+            });
+
+            document.body.style.overflow = "hidden";
+            initIntroCanvas();
+            initInteractions();
+            initConstellations();
+        });
+
+        function initInteractions() {
+            const bgAudio = document.getElementById("bg-music");
+            const audioBtn = document.getElementById("audio-toggle");
+            const uiOverlay = document.getElementById("ui-overlay");
+            let isBgPlaying = false;
+
+            gsap.to(".intro-greeting", { opacity: 1, y: -10, duration: 1, ease: "power2.out", delay: 0.1 });
+            gsap.to(".intro-sub", { opacity: 1, y: -10, duration: 1, ease: "power2.out", delay: 0.4 });
+            gsap.to("#enter-btn", { opacity: 1, duration: 0.8, delay: 0.8 });
+
+            document.getElementById("enter-btn").addEventListener("click", () => {
+                try {
+                    bgAudio.volume = 1.0;
+                    const playPromise = bgAudio.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            isBgPlaying = true;
+                            uiOverlay.style.opacity = "1";
+                            uiOverlay.classList.add("active");
+                        }).catch(() => {
+                            uiOverlay.style.opacity = "1";
+                            uiOverlay.classList.add("active");
+                        });
+                    }
+                } catch(e) {}
+
+                gsap.to("#scene-intro", { 
+                    opacity: 0, duration: 0.8, ease: "power2.inOut",
+                    onComplete: () => {
+                        document.getElementById("scene-intro").style.display = 'none';
+                        document.getElementById("main-content").style.visibility = 'visible';
+                        document.body.style.overflow = "auto";
+                        setTimeout(triggerMainAnimations, 50);
+                    }
+                });
+            });
+
+            audioBtn.addEventListener("click", () => {
+                if(isBgPlaying) { bgAudio.pause(); audioBtn.style.opacity = "0.7"; } 
+                else { bgAudio.play(); audioBtn.style.opacity = "1"; }
+                isBgPlaying = !isBgPlaying;
+            });
+
+            const envelopeWrapper = document.getElementById("envelope-wrapper");
+            const envelope = document.getElementById("envelope");
+            const overlay = document.getElementById("letter-overlay");
+            
+            envelopeWrapper.addEventListener("click", () => { 
+                envelope.classList.add("open"); 
+                setTimeout(() => {
+                    overlay.classList.add("open"); 
+                    document.body.style.overflow = "hidden"; 
+                }, 600);
+            });
+            
+            document.getElementById("close-letter").addEventListener("click", () => { 
+                overlay.classList.remove("open"); 
+                document.body.style.overflow = "auto"; 
+                setTimeout(() => envelope.classList.remove("open"), 400); 
+            });
+            
+            overlay.addEventListener("click", (e) => { 
+                if(e.target === overlay) { 
+                    overlay.classList.remove("open"); 
+                    document.body.style.overflow = "auto"; 
+                    setTimeout(() => envelope.classList.remove("open"), 400);
+                } 
+            });
+            
+            document.getElementById("replay-btn").addEventListener("click", () => {
+                window.scrollTo(0,0);
+                setTimeout(() => location.reload(), 400);
+            });
+        }
+
+        function triggerMainAnimations() {
+            ScrollTrigger.refresh();
+
+            const tlReveal = gsap.timeline({ scrollTrigger: { trigger: "#scene-reveal", start: "top top", end: "+=120%", scrub: 1, pin: true } });
+            tlReveal.to(".reveal-pre", { opacity: 1, y: -15, duration: 1 })
+                    .to(".reveal-date", { opacity: 1, y: -10, duration: 1 }, "-=0.5")
+                    .to(".reveal-main", { opacity: 1, scale: 1.05, duration: 1.5 })
+                    .to(".reveal-name", { opacity: 1, y: -10, duration: 1.5 }, "-=1");
+
+            ScrollTrigger.create({
+                trigger: "#confetti-trigger", start: "top 45%", once: true,
+                onEnter: () => {
+                    confetti({ particleCount: isMobile ? 60 : 120, spread: 100, origin: { y: 0.5 }, colors: ['#ff0844', '#ffb199', '#fecfef', '#ffffff'], gravity: 0.6, disableForReducedMotion: true, zIndex: 999 });
+                }
+            });
+
+            gsap.to(".journey-text", { scrollTrigger: { trigger: "#scene-journey", start: "top 65%" }, opacity: 1, y: -15, duration: 1.2 });
+            gsap.to(".journey-sub", { scrollTrigger: { trigger: "#scene-journey", start: "top 55%" }, opacity: 1, y: -15, duration: 1.2, delay: 0.2 });
+
+            gsap.utils.toArray('.memory-item').forEach(item => {
+                gsap.to(item, { scrollTrigger: { trigger: item, start: "top 85%" }, opacity: 1, y: 0, duration: 1 });
+            });
+
+            ScrollTrigger.create({
+                trigger: "#scene-wishes", start: "top 75%", once: true,
+                onEnter: () => {
+                    document.querySelectorAll(".wish-card").forEach((card, index) => {
+                        setTimeout(() => card.classList.add("show"), index * 100);
+                    });
+                }
+            });
+
+            const tlOutro = gsap.timeline({ scrollTrigger: { trigger: "#scene-outro", start: "top 65%" } });
+            tlOutro.to(".outro-quote", { opacity: 1, y: -15, duration: 1 })
+                   .to(".outro-wish", { opacity: 1, duration: 1 }, "+=0.3")
+                   .to(".outro-signature", { opacity: 1, duration: 1 }, "-=0.3")
+                   .to("#replay-btn", { opacity: 1, duration: 1 });
+        }
+
+        /* Highly Optimized Intro Canvas */
+        function initIntroCanvas() {
+            const canvas = document.getElementById("intro-canvas");
+            const ctx = canvas.getContext("2d");
+            let w, h, particles = [], animationFrameId;
+            const particleCount = isMobile ? 25 : 50;
+
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+            window.addEventListener("resize", resize); resize();
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 3 + 1, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, alpha: Math.random() * 0.5 + 0.2 });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => {
+                    p.x += p.vx; p.y += p.vy;
+                    if(p.x < 0 || p.x > w) p.vx *= -1; if(p.y < 0 || p.y > h) p.vy *= -1; 
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(255, 8, 68, ${p.alpha})`; ctx.fill(); 
+                });
+                animationFrameId = requestAnimationFrame(animate);
+            }
+            animate();
+            
+            document.getElementById("enter-btn").addEventListener("click", () => {
+                setTimeout(() => cancelAnimationFrame(animationFrameId), 1000); 
+            });
+        }
+
+        /* Highly Optimized Constellation Canvas (Math Fix) */
+        function initConstellations() {
+            const canvas = document.getElementById("constellation-canvas");
+            const ctx = canvas.getContext("2d");
+            let w, h, stars = [], isAnimating = false, animationFrameId;
+            const starCount = isMobile ? 30 : 60;
+
+            function resize() { w = canvas.width = canvas.parentElement.clientWidth; h = canvas.height = canvas.parentElement.clientHeight; }
+            window.addEventListener("resize", resize); resize();
+
+            for (let i = 0; i < starCount; i++) {
+                stars.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.15, vy: (Math.random() - 0.5) * 0.15, r: Math.random() * 1.5 + 0.5 });
+            }
+
+            function animate() {
+                if(!isAnimating) return;
+                ctx.clearRect(0, 0, w, h);
+                
+                stars.forEach(s => {
+                    s.x += s.vx; s.y += s.vy;
+                    if (s.x < 0 || s.x > w) s.vx *= -1; if (s.y < 0 || s.y > h) s.vy *= -1;
+                    ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fillStyle = "rgba(255, 8, 68, 0.6)"; ctx.fill();
+                });
+
+                // Optimized Math Check (Using Squared Distance instead of Sqrt for huge performance gain)
+                const connectionDistSq = 10000; // 100 * 100
+                for (let i = 0; i < stars.length; i++) {
+                    for (let j = i + 1; j < stars.length; j++) {
+                        let dx = stars[i].x - stars[j].x, dy = stars[i].y - stars[j].y;
+                        let distSq = dx * dx + dy * dy;
+                        if (distSq < connectionDistSq) { 
+                            let dist = Math.sqrt(distSq);
+                            ctx.beginPath(); 
+                            ctx.strokeStyle = `rgba(255, 8, 68, ${0.15 * (1 - dist/100)})`; 
+                            ctx.lineWidth = 0.5; 
+                            ctx.moveTo(stars[i].x, stars[i].y); ctx.lineTo(stars[j].x, stars[j].y); 
+                            ctx.stroke(); 
+                        }
+                    }
+                }
+                animationFrameId = requestAnimationFrame(animate);
+            }
+            
+            const observer = new IntersectionObserver((entries) => {
+                if(entries[0].isIntersecting) { 
+                    if (!isAnimating) { isAnimating = true; animate(); }
+                } else { 
+                    isAnimating = false; cancelAnimationFrame(animationFrameId);
+                }
+            });
+            observer.observe(canvas.parentElement);
+        }
+    </script>
+</body>
+</html>
